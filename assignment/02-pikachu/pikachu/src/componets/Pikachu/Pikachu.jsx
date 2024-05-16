@@ -5,7 +5,8 @@ function Pikachu() {
   const [positionX, setPositionX] = useState(0);
   const [positionY, setPositionY] = useState(0);
   const [jump, setJump] = useState("");
-
+  const [reverse, setReverse] = useState(1);
+  console.log(reverse);
   const moveDown = () => {
     setPositionY((prev) => {
       if (prev > 800) {
@@ -30,6 +31,7 @@ function Pikachu() {
       }
       return prev - 100;
     });
+    setReverse(-1);
   };
   const moveRight = () => {
     setPositionX((prev) => {
@@ -38,6 +40,7 @@ function Pikachu() {
       }
       return prev + 100;
     });
+    setReverse(1);
   };
   const jumpUp = () => {
     const value = "jumpUp 0.3s ease";
@@ -82,7 +85,7 @@ function Pikachu() {
         onKeyUp={handleKeyPressOut}
         autoFocus
         style={{
-          transform: `translate(${positionX}%,${positionY}%)`,
+          transform: `translate(${positionX}%,${positionY}%) scaleX(${reverse})`,
           animation: `${jump}`,
         }}
       />

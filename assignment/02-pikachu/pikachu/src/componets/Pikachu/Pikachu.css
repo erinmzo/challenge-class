@@ -1,0 +1,41 @@
+#board {
+  width: 540px;
+  height: 520px;
+  margin: 50px auto;
+  background: url("../../assets/grass.png") no-repeat;
+  background-size: 54px, 52px;
+  background-repeat: repeat;
+  background-color: greenyellow;
+}
+
+#board .pikachu {
+  display: flex;
+  width: 50px;
+  height: 50px;
+  background: url("../../assets/pikachu.png");
+  background-size: cover;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  caret-color: transparent;
+  cursor: default;
+  outline: none;
+  transition: all 0.2s ease-in-out;
+}
+
+@keyframes jumpUp {
+  0% {
+    translate: 0%;
+  }
+  100% {
+    translate: 0% -100%;
+  }
+}
+@keyframes jumpDown {
+  0% {
+    translate: 0% -100%;
+  }
+  100% {
+    translate: 0% 0%;
+  }
+}

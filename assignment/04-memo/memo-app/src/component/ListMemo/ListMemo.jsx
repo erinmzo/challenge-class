@@ -7,7 +7,6 @@ function ListMemo() {
   const handleMemoActive = (id) => {
     dispatch(clickMemo(id));
   };
-  console.log(memoList);
   return (
     <>
       <StMemoListBox>

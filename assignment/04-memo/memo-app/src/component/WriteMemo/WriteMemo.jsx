@@ -1,3 +1,5 @@
+import _ from "lodash";
+import { useCallback, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { updateMemo } from "../../redux/slices/memoList.slice";
@@ -5,12 +7,22 @@ function WriteMemo() {
   const dispatch = useDispatch();
   const memoList = useSelector((state) => state.memoList.list);
   const activeMemo = memoList.find((memo) => memo.isActive);
+  const [value, setValue] = useState(activeMemo.content);
 
-  const handleContentChange = (e) => {
-    const newMemoList = memoList.map((memo) =>
-      memo.isActive === true ? { ...memo, content: e.target.value } : memo
-    );
-    dispatch(updateMemo(newMemoList));
+  const handleContentChange = useCallback(
+    _.debounce((content) => {
+      const newMemoList = memoList.map((memo) =>
+        memo.isActive === true ? { ...memo, content } : memo
+      );
+      console.log("rendering");
+      dispatch(updateMemo(newMemoList));
+    }, 100),
+    []
+  );
+
+  const handleChange = (e) => {
+    setValue(e.target.value);
+    handleContentChange(e.target.value);
   };
 
   return (
@@ -18,10 +30,7 @@ function WriteMemo() {
       {activeMemo && (
         <>
           <StDate>{activeMemo.time}</StDate>
-          <StTextarea
-            onChange={handleContentChange}
-            value={activeMemo.content}
-          />
+          <StTextarea onChange={handleChange} value={value} />
         </>
       )}
     </StMemo>

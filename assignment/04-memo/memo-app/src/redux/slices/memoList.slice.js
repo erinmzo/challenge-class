@@ -2,7 +2,6 @@ import { createSlice } from "@reduxjs/toolkit";
 import { v4 as uuid } from "uuid";
 
 const initialState = {
-  selectedId: "",
   list: [
     {
       id: uuid(),
@@ -33,8 +32,17 @@ export const memoListSlice = createSlice({
       state.list = [action.payload, ...prevList];
     },
     deleteMemo: (state) => {
-      const filteredList = state.list.filter((memo) => memo.isActive !== true);
-      state.list = filteredList;
+      if (state.list.length > 1) {
+        const filteredList = state.list.filter(
+          (memo) => memo.isActive !== true
+        );
+        state.list = filteredList;
+      }
+      state.list.forEach((memo, index) => {
+        if (index === 0) {
+          memo.isActive = true;
+        }
+      });
     },
     updateMemo: (state, action) => {
       state.list = [...action.payload];

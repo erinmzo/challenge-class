@@ -1,0 +1,1 @@
+export const INITIAL_TRANSLTATE_X = 370;

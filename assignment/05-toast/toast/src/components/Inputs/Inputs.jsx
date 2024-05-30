@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useToast } from "../../contexts/Toast.context";
 
 function Inputs() {
-  const toast = useToast();
+  const { openToast } = useToast();
   const [title, setTitle] = useState("Scheduled: Catch up");
   const [content, setContent] = useState(
     "Friday, February 10, 2023 at 5:57 PM"
@@ -36,12 +36,12 @@ function Inputs() {
     e.preventDefault();
     const isValid = validate();
     if (!isValid) return;
-    const newList = {
+    const toast = {
       title,
       content,
       second,
     };
-    toast.openToast(newList);
+    openToast(toast);
   };
 
   return (

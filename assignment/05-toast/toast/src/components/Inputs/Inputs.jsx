@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useToast } from "../../contexts/Toast.context";
-import Toast from "../Toast/Toast";
 
 function Inputs() {
   const toast = useToast();
@@ -42,7 +41,7 @@ function Inputs() {
       content,
       second,
     };
-    toast.openToast(<Toast newList={newList} />);
+    toast.openToast(newList);
   };
 
   return (

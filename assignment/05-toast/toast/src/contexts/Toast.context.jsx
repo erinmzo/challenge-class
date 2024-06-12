@@ -18,18 +18,14 @@ export function ToastProvider({ children }) {
 
   const openToast = useCallback(({ title, content, second }) => {
     const id = uuidv4();
-
     setToasts((prev) => [...prev, { title, content, second, id }]);
-
     setTimeout(() => {
       setToasts((prevToasts) => prevToasts.filter((toast) => toast.id !== id));
     }, second);
   }, []);
 
   const value = useMemo(() => {
-    return {
-      openToast,
-    };
+    return { openToast };
   }, [openToast]);
 
   return (
